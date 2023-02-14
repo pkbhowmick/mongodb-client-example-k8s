@@ -10,3 +10,6 @@ client-docker: build-client
 
 push-docker: client-docker
 	docker push ${REGISTRY}/${REPOSITORY}:${VERSION}
+
+push-to-kind: client-docker
+	kind load docker-image ${REGISTRY}/${REPOSITORY}:${VERSION}
