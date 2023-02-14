@@ -12,14 +12,16 @@ import (
 )
 
 var (
-	svcURI string
+	svcURI  string
+	timeout time.Duration
 )
 
 func main() {
 	flag.StringVar(&svcURI, "svc-url", "", "Kubernetes mongodb service url")
+	flag.DurationVar(&timeout, "timeout", time.Second*10, "Timeout for mongodb connection")
 	flag.Parse()
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(svcURI))
 	if err != nil {
