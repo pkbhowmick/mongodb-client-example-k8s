@@ -6,5 +6,5 @@ COPY bin/client .
 
 ENTRYPOINT ["./client"]
 
-CMD ["--svc-url=value"]
+
 
